@@ -1,5 +1,9 @@
 "use client"
+
+import { useRouter } from "next/navigation";
+
 export default function Create() {
+	const router = useRouter();
 	return (
 		<form onSubmit={(event) => {
 			event.preventDefault();
@@ -16,6 +20,8 @@ export default function Create() {
 				.then(res => res.json())
 				.then(result => {
 					console.log(result);
+					const lastid = result.id;
+					router.push(`/read/${lastid}`);
 				})
 		}}>
 			<p>
