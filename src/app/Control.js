@@ -13,7 +13,7 @@ export function Control() {
         <li><Link href={'/update/'+id}>Update</Link></li>
         <li>
           <button onClick={async () => {
-            const resp = await fetch(`http://localhost:9999/topics/${id}`, {
+            const resp = await fetch(process.env.NEXT_PUBLIC_API_URL+`topics/${id}`, {
               method: 'DELETE',
             });
             await resp.json();

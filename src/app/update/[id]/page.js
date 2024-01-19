@@ -1,6 +1,6 @@
 "use client"
 
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Update(props) {
@@ -9,7 +9,7 @@ export default function Update(props) {
 	const router = useRouter();
 	const id = props.params.id;
 	async function refresh() {
-		const resp = await fetch(`http://localhost:9999/topics/${id}`);
+		const resp = await fetch(process.env.NEXT_PUBLIC_API_URL+`topics/${id}`);
 		const topic = await resp.json();
 		setTitle(topic.title);
 		setBody(topic.body);
@@ -22,7 +22,7 @@ export default function Update(props) {
 			event.preventDefault();
 			const title = event.target.title.value;
 			const body = event.target.body.value;
-			const resp = await fetch(`http://localhost:9999/topics/${id}`, {
+			const resp = await fetch(process.env.NEXT_PUBLIC_API_URL+`topics/${id}`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json'
